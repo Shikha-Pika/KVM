@@ -3,6 +3,17 @@ import sys
 # number of instructions converted so far
 instr_count = 0
 
+def make_op(opname, operands):
+  opers = ', '.join(operands)
+  if len(operands) == 3:
+    return f'opABC({opname}, {opers})'
+  elif len(operands) == 2:
+    return f'opAB({opname}, {opers})'
+  elif len(operands) == 1:
+    return f'opA({opname}, {opers})'
+  else:
+    return f'op({opname})'
+
 # convert a single KVM instruction to C code
 def instr_to_c(code, operands):
   global instr_count
@@ -11,13 +22,12 @@ def instr_to_c(code, operands):
   
   for operand in operands:
     if operand[0] == '$':
-      c_operands.append(int(operand[1:]))
+      c_operands.append(operand[1:])
     else:
-      c_operands.append(int(operand))
+      c_operands.append(operand)
+  
 
-  res = f'ins[{instr_count}].op = {c_opname};\n'
-  for i in range(len(c_operands)):
-    res += f'ins[{instr_count}].operands[i] = {c_operands[i]};\n'
+  res = f'{make_op(c_opname, c_operands)}, \n\n'
   
   instr_count += 1
   return res
@@ -26,15 +36,15 @@ def instr_to_c(code, operands):
 def src_to_c(code):
   lines = code.split('\n')
   lines = list(filter(lambda line : len(line) >= 1, lines))
-  code = 'Instruction ins[!@];\n\n'
+  code = 'Instruction ins[!@] = {\n'
 
   for line in lines:
     instr = line.split(' ')
     instr = list(filter(lambda s : len(s) >= 1, instr))
-    code += f'/* {line} */\n'
-    code += instr_to_c(instr[0], instr[1:]) + '\n'
+    code += f'\t/* {line} */\n'
+    code += '\t' + instr_to_c(instr[0], instr[1:])  
 
-  return code.replace('!@', str(instr_count))
+  return code.replace('!@', str(instr_count)) + '};'
 
 
 def main():
