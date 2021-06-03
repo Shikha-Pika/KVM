@@ -18,7 +18,6 @@ typedef struct
 typedef struct
 {
     int regs[NUM_REGS];
-    Instruction instr;
 } VM;
 
 // printRegister(VM* vm, int i) -> prints the ith register of the VM [vm]
