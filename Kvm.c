@@ -43,9 +43,14 @@ void runVM(VM *vm, Instruction *ins, int numInstrs)
             vm->regs[r_no] = value;
             break;
         }
-        // case OP_ADD:
-        //     j = ins->operands[2];
-        //     vm->regs[j] = vm->regs[1] + vm->regs[0];
+        case OP_ADD:
+        {
+            const int r_no = instr.operands[2];
+            const int value1 = instr.operands[0];
+            const int value2 = instr.operands[1];
+            vm->regs[r_no] = vm->regs[value1] + vm->regs[value2];
+            break;
+        }
         default:
             fprintf(stderr, "Invalid Opcode!");
             exit(1);
@@ -70,12 +75,13 @@ int main()
     ins[1].operands[0] = 20;
     ins[1].operands[1] = 1;
 
-    // ins[2].op = OP_ADD;
-    // ins[2].operands[0] = 0;
-    // ins[2].operands[1] = 1;
-    // ins[2].operands[2] = 2;
+    ins[2].op = OP_ADD;
+    ins[2].operands[0] = 0;
+    ins[2].operands[1] = 1;
+    ins[2].operands[2] = 2;
 
-    runVM(&vm, ins, 2);
+    runVM(&vm, ins, 3);
     printRegister(&vm, 0); // 10
     printRegister(&vm, 1); // 20
+    printRegister(&vm, 2); //30
 }
