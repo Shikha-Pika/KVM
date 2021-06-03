@@ -3,21 +3,23 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-Instruction opABC(Opcode op, int a, int b, int c) {
-  Instruction inst;
-  inst.rA = a;
-  inst.rB = b;
-  inst.rC = c;
-  inst.op = op;
-  return inst;
+Instruction opABC(Opcode op, int a, int b, int c)
+{
+    Instruction inst;
+    inst.rA = a;
+    inst.rB = b;
+    inst.rC = c;
+    inst.op = op;
+    return inst;
 }
 
-Instruction opAB(Opcode op, int a, int b) {
-  Instruction inst;
-  inst.rA = a;
-  inst.rB = b;
-  inst.op = op;
-  return inst;
+Instruction opAB(Opcode op, int a, int b)
+{
+    Instruction inst;
+    inst.rA = a;
+    inst.rB = b;
+    inst.op = op;
+    return inst;
 }
 
 // printRegister(VM* vm, int i) -> prints the ith register of the VM [vm]
@@ -57,4 +59,3 @@ void runVM(VM *vm, Instruction *ins, int numInstrs)
         }
     }
 }
-
