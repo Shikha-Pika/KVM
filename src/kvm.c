@@ -33,9 +33,7 @@ void initVM(VM *vm)
 }
 
 // addConstant(VM *vm, int num) -> adds constants into the pool
-void addConstant(VM *vm, int num) {
-    vm->constPool[numCount++] = num;
-}
+void addConstant(VM *vm, int num) { vm->constPool[numCount++] = num; }
 
 // printRegister(VM* vm, int i) -> prints the ith register of the VM [vm]
 void printRegister(VM *vm, int i)
@@ -43,10 +41,8 @@ void printRegister(VM *vm, int i)
     printf("R_R%d - [ %d ]\n", i, vm->regs[i]);
 }
 
-//poolVal(VM *vm, int index) -> extracts the constant from the pool
-int poolVal(VM *vm, int index) {
-    return vm->constPool[index];
-}
+// poolVal(VM *vm, int index) -> extracts the constant from the pool
+int poolVal(VM *vm, int index) { return vm->constPool[index]; }
 
 // runVM(VM* vm, Instruction* ins, int n_ins) -> executes the instructions
 // present in
@@ -62,7 +58,7 @@ void runVM(VM *vm, Instruction *ins, int numInstrs)
         {
             const int r_no = instr.rB;
             const int poolIndex = instr.rA;
-            const int value = poolVal(vm, poolIndex);  
+            const int value = poolVal(vm, poolIndex);
             vm->regs[r_no] = value;
             break;
         }
