@@ -1,6 +1,6 @@
 #ifndef KVM_H
 #define KVM_H
-#define NUM_REGS 3
+#define NUM_REGS 10 
 
 typedef enum
 {

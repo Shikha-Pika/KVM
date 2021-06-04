@@ -36,7 +36,7 @@ def instr_to_c(code, operands):
 def src_to_c(code):
   lines = code.split('\n')
   lines = list(filter(lambda line : len(line) >= 1, lines))
-  code = 'Instruction ins[!@] = {\n'
+  code = '{\nVM vm;\nInstruction ins[!@] = {\n'
 
   for line in lines:
     instr = line.split(' ')
@@ -44,7 +44,10 @@ def src_to_c(code):
     code += f'\t/* {line} */\n'
     code += '\t' + instr_to_c(instr[0], instr[1:])  
 
-  return code.replace('!@', str(instr_count)) + '};'
+  return (code.replace('!@', str(instr_count))  
+    + '};\nrunVM(&vm, ins, ' 
+    + str(instr_count) 
+    + ');\n}')
 
 
 def main():

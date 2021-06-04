@@ -18,8 +18,12 @@ def make_vm():
 def make_main():
   system(f'{cc} main.c {bin_dir}/kvm.o -o {bin_dir}/{exe_name}')
 
+def make_tests():
+  system(f'{cc} {bin_dir}/kvm.o {test_dir}/test-vm.c -o {bin_dir}/test')
+
 def make_all():
   make_vm()
+  make_tests()
   make_main()
 
 def main():
@@ -34,5 +38,7 @@ def main():
     return
   elif argv[1] == 'vm':
     make_vm()
+  elif argv[1] == 'test':
+    make_tests()
 
 main()
