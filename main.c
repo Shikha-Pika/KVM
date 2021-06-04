@@ -3,9 +3,7 @@
 int main()
 {
     VM vm;
-    vm.regs[0] = 0;
-    vm.regs[1] = 0;
-    vm.regs[2] = 0;
+    initVM(&vm);
 
     Instruction ins[3] = {
         /* LOAD 10 $1 */

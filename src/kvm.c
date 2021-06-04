@@ -1,7 +1,8 @@
 #include "kvm.h"
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
+int numCount = 0;
 
 Instruction opABC(Opcode op, int a, int b, int c)
 {
@@ -22,13 +23,33 @@ Instruction opAB(Opcode op, int a, int b)
     return inst;
 }
 
+// initializing the register values
+void initVM(VM *vm)
+{
+    for (int i = 0; i < 100; i++)
+    {
+        vm->regs[i] = 0;
+    }
+}
+
+// addConstant(VM *vm, int num) -> adds constants into the pool
+void addConstant(VM *vm, int num) {
+    vm->constPool[numCount++] = num;
+}
+
 // printRegister(VM* vm, int i) -> prints the ith register of the VM [vm]
 void printRegister(VM *vm, int i)
 {
     printf("R_R%d - [ %d ]\n", i, vm->regs[i]);
 }
 
-// runVM(VM* vm, Instruction* ins, int n_ins) -> executes the instructions present in
+//poolVal(VM *vm, int index) -> extracts the constant from the pool
+int poolVal(VM *vm, int index) {
+    return vm->constPool[index];
+}
+
+// runVM(VM* vm, Instruction* ins, int n_ins) -> executes the instructions
+// present in
 //      the buffer [ins]
 void runVM(VM *vm, Instruction *ins, int numInstrs)
 {
@@ -40,7 +61,8 @@ void runVM(VM *vm, Instruction *ins, int numInstrs)
         case OP_LOAD:
         {
             const int r_no = instr.rB;
-            const int value = instr.rA;
+            const int poolIndex = instr.rA;
+            const int value = poolVal(vm, poolIndex);  
             vm->regs[r_no] = value;
             break;
         }

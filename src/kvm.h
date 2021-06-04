@@ -1,6 +1,7 @@
 #ifndef KVM_H
 #define KVM_H
-#define NUM_REGS 10 
+#define NUM_REGS 10
+#include <stddef.h>
 
 typedef enum
 {
@@ -11,18 +12,21 @@ typedef enum
 typedef struct
 {
     Opcode op;
-    int rA, rB, rC;
+    size_t rA, rB, rC;
 } Instruction;
 
 typedef struct
 {
     int regs[NUM_REGS];
+    size_t constPool[100];
 } VM;
 
-//function prototypes
+// function prototypes
 
 Instruction opAB(Opcode op, int a, int b);
 Instruction opABC(Opcode op, int a, int b, int c);
+void initVM(VM *vm);
+void addConstant(VM *vm, int num);
 void printRegister(VM *vm, int i);
 void runVM(VM *vm, Instruction *ins, int numInstrs);
 
