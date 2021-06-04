@@ -23,6 +23,7 @@ def make_all():
 def main():
   argc = len(sys.argv)
   argv = sys.argv
+  system('mkdir -p {bin_dir}')
   if argv != 2:
     make_all()
     return
