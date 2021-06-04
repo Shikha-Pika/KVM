@@ -56,7 +56,7 @@ def main():
   else:
     file = open(argv[1], 'r')
     src = file.read()
-    out_file = open('out.c', 'w')
+    out_file = open('scratch/out.c', 'w')
     out_file.write(src_to_c(src))
 
 main()
