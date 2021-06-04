@@ -1,10 +1,13 @@
+OUT_DIR=bin
+EXE=$OUT_DIR/kvm
+
 if [[ $1 == "all" ]]
 then 
-  gcc kvm.c -c -o kvm.o
-  gcc main.c kvm.o;
+  gcc src/kvm.c -c -o $OUT_DIR/kvm.o
+  gcc main.c $OUT_DIR/kvm.o -o $EXE;
 elif [[ $1 == "vm" ]]
 then 
-  gcc kvm.c -o kvm.o
+  gcc src/kvm.c -o $OUT_DIR/kvm.o
 else 
-  gcc main.c kvm.o
+  gcc main.c $OUT_DIR/kvm.o -o $EXE
 fi
