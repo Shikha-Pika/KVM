@@ -1,12 +1,14 @@
 import sys
-from os import system
+import os
+
+system = os.system
 
 ## change these variables to configure different compiler
 ## or add new source files.
 cc = 'gcc'
-src_dir = 'src/'
-bin_dir = 'bin/'
-test_dir = 'test/'
+src_dir = 'src'
+bin_dir = 'bin'
+test_dir = 'test'
 
 exe_name = 'kvm'
 
@@ -21,9 +23,12 @@ def make_all():
   make_main()
 
 def main():
+  global bin_dir
   argc = len(sys.argv)
   argv = sys.argv
-  system('mkdir -p {bin_dir}')
+   
+  os.makedirs(bin_dir, exist_ok=True)
+  
   if argv != 2:
     make_all()
     return
