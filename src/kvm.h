@@ -1,6 +1,7 @@
 #ifndef KVM_H
 #define KVM_H
 #define NUM_REGS 10
+#define MAX_CONSTANTS 100
 #include <stddef.h>
 
 typedef enum
@@ -18,7 +19,8 @@ typedef struct
 typedef struct
 {
     int regs[NUM_REGS];
-    size_t constPool[100];
+    size_t constPool[MAX_CONSTANTS];
+    int numCount;
 } VM;
 
 // function prototypes
