@@ -25,7 +25,7 @@ Instruction opAB(Opcode op, int a, int b)
 // initializing the register values
 void initVM(VM *vm)
 {
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < MAX_CONSTANTS; i++)
     {
         vm->regs[i] = 0;
     }
@@ -66,6 +66,30 @@ void runVM(VM *vm, Instruction *ins, int numInstrs)
             const int value1 = instr.rA;
             const int value2 = instr.rB;
             vm->regs[r_no] = vm->regs[value1] + vm->regs[value2];
+            break;
+        }
+        case OP_MULT:
+        {
+            const int r_no = instr.rC;
+            const int value1 = instr.rA;
+            const int value2 = instr.rB;
+            vm->regs[r_no] = vm->regs[value1] * vm->regs[value2];
+            break;
+        }
+        case OP_SUB:
+        {
+            const int r_no = instr.rC;
+            const int value1 = instr.rA;
+            const int value2 = instr.rB;
+            vm->regs[r_no] = vm->regs[value1] - vm->regs[value2];
+            break;
+        }
+        case OP_DIV:
+        {
+            const int r_no = instr.rC;
+            const int value1 = instr.rA;
+            const int value2 = instr.rB;
+            vm->regs[r_no] = vm->regs[value1] / vm->regs[value2];
             break;
         }
         default:

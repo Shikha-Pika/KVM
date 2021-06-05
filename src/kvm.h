@@ -7,7 +7,10 @@
 typedef enum
 {
     OP_LOAD,
-    OP_ADD
+    OP_ADD,
+    OP_MULT,
+    OP_SUB,
+    OP_DIV
 } Opcode;
 
 typedef struct
