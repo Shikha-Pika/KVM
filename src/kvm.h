@@ -25,7 +25,6 @@ typedef struct
     size_t constPool[MAX_CONSTANTS];
     int numCount;
 } VM;
-
 // function prototypes
 
 Instruction opAB(Opcode op, int a, int b);

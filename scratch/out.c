@@ -1,17 +1,15 @@
 {
-    VM vm;
-    Instruction ins[4] = {
-        /* LOAD 10 $1 */
-        opAB(OP_LOAD, 10, 1),
+VM vm;
+Instruction ins[3] = {
+	/* LOAD 1 $5 */
+	opAB(OP_LOAD, 1, 5), 
 
-        /* LOAD 20 $2 */
-        opAB(OP_LOAD, 20, 2),
+	/* LOAD 20 $2 */
+	opAB(OP_LOAD, 20, 2), 
 
-        /* ADD $1 $2 $3 */
-        opABC(OP_ADD, 1, 2, 3),
+	/* ADD $5 $2 $3 */
+	opABC(OP_ADD, 5, 2, 3), 
 
-        /* ADD $3 $3 $0 */
-        opABC(OP_ADD, 3, 3, 0),
-    };
-    runVM(&vm, ins, 4);
+};
+runVM(&vm, ins, 3);
 }

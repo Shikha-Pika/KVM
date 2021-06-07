@@ -87,9 +87,9 @@ void runVM(VM *vm, Instruction *ins, int numInstrs)
         case OP_DIV:
         {
             const int r_no = instr.rC;
-            const int value1 = instr.rA;
-            const int value2 = instr.rB;
-            vm->regs[r_no] = vm->regs[value1] / vm->regs[value2];
+            const int lval = instr.rA;
+            const int rval = instr.rB;
+            vm->regs[r_no] = vm->regs[lval] / vm->regs[rval];
             break;
         }
         default:

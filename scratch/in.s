@@ -1,4 +1,3 @@
-LOAD 10 $1
+LOAD 1 $5
 LOAD 20 $2
-ADD $1 $2 $3
-ADD $3 $3 $0
+ADD $5 $2 $3
